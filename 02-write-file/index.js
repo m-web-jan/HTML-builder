@@ -1,12 +1,15 @@
 const fs = require('fs');
 const readline = require('readline');
+const path = require('path');
 
 var rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
-fs.writeFile('02-write-file\\text.txt', '', (err) => {
+let filePath = path.join(__dirname, 'text.txt');
+
+fs.writeFile(filePath, '', (err) => {
   if (err) throw err;
 });
 console.log('Введите текст:');
@@ -17,7 +20,7 @@ rl.on('line', (data) => {
     if (line[i] == 'exit') {
       rl.close();
     } else {
-      fs.appendFile('02-write-file\\text.txt', line[i] + ' ', (err) => {
+      fs.appendFile(filePath, line[i] + ' ', (err) => {
         if (err) throw err;
       });
     }
