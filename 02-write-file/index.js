@@ -26,3 +26,7 @@ rl.on('line', (data) => {
     }
   }
 });
+
+rl.on('close', () => {
+  console.log('Текст сохранен.');
+});
