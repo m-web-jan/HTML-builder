@@ -7,6 +7,7 @@ let CSSpath = path.join(__dirname, 'project-dist', 'style.css');
 fs.writeFile(CSSpath, '', (err) => {
   if (err) throw err;
 });
+
 fs.readdir('06-build-page/styles', (err, files) => {
   for (let file of files) {
     let file_path = path.join(__dirname, 'styles', file);
@@ -40,6 +41,7 @@ copyDir(
 );
 copyDir('06-build-page/assets/img', '06-build-page/project-dist/assets/img');
 copyDir('06-build-page/assets/svg', '06-build-page/project-dist/assets/svg');
+copyDir('06-build-page/test-files/components', '06-build-page/components');
 
 function replaceTag() {
   let mainFile_path = path.join(__dirname, 'template.html');
