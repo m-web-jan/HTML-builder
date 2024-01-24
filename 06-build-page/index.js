@@ -42,6 +42,8 @@ copyDir(
 copyDir('06-build-page/assets/img', '06-build-page/project-dist/assets/img');
 copyDir('06-build-page/assets/svg', '06-build-page/project-dist/assets/svg');
 copyDir('06-build-page/test-files/components', '06-build-page/components');
+copyDir('06-build-page/test-files/images', '06-build-page/assets/img');
+copyDir('06-build-page/test-files/styles', '06-build-page/styles');
 
 function replaceTag() {
   let mainFile_path = path.join(__dirname, 'template.html');
@@ -55,23 +57,29 @@ function replaceTag() {
           '06-build-page/components/header.html',
           'utf8',
           (err, data2) => {
-            if (err) throw err;
             fs.readFile(
               '06-build-page/components/articles.html',
               'utf8',
               (err, data3) => {
-                if (err) throw err;
                 fs.readFile(
                   '06-build-page/components/footer.html',
                   'utf8',
                   (err, data4) => {
-                    if (err) throw err;
-                    data1 = data1.replace(/\{\{header\}\}/, data2);
-                    data1 = data1.replace(/\{\{articles\}\}/, data3);
-                    data1 = data1.replace(/\{\{footer\}\}/, data4);
-                    fs.writeFile(file_path, data1, (err) => {
-                      if (err) throw err;
-                    });
+                    if (data1.includes('{{about}}')) {
+                      fs.readFile(
+                        '06-build-page/components/about.html',
+                        'utf8',
+                        (err, data5) => {
+                          data1 = data1.replace(/\{\{header\}\}/, data2);
+                          data1 = data1.replace(/\{\{articles\}\}/, data3);
+                          data1 = data1.replace(/\{\{footer\}\}/, data4);
+                          data1 = data1.replace(/\{\{about\}\}/, data5);
+                          fs.writeFile(file_path, data1, (err) => {
+                            if (err) throw err;
+                          });
+                        },
+                      );
+                    }
                   },
                 );
               },
