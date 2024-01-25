@@ -41,9 +41,8 @@ copyDir(
 );
 copyDir('06-build-page/assets/img', '06-build-page/project-dist/assets/img');
 copyDir('06-build-page/assets/svg', '06-build-page/project-dist/assets/svg');
-copyDir('06-build-page/test-files/components', '06-build-page/components');
-copyDir('06-build-page/test-files/images', '06-build-page/assets/img');
-copyDir('06-build-page/test-files/styles', '06-build-page/styles');
+
+
 
 function replaceTag() {
   let mainFile_path = path.join(__dirname, 'template.html');
