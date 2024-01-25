@@ -61,14 +61,17 @@ function replaceTag() {
                   path.join(__dirname, 'components/footer.html'),
                   'utf8',
                   (err, data4) => {
+                    data1 = data1.replace(/\{\{header\}\}/, data2);
+                    data1 = data1.replace(/\{\{articles\}\}/, data3);
+                    data1 = data1.replace(/\{\{footer\}\}/, data4);
+                    fs.writeFile(file_path, data1, (err) => {
+                      if (err) throw err;
+                    });
                     if (data1.includes('{{about}}')) {
                       fs.readFile(
                         path.join(__dirname, 'components/about.html'),
                         'utf8',
                         (err, data5) => {
-                          data1 = data1.replace(/\{\{header\}\}/, data2);
-                          data1 = data1.replace(/\{\{articles\}\}/, data3);
-                          data1 = data1.replace(/\{\{footer\}\}/, data4);
                           data1 = data1.replace(/\{\{about\}\}/, data5);
                           fs.writeFile(file_path, data1, (err) => {
                             if (err) throw err;
