@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-fs.mkdir('06-build-page/project-dist', { recursive: true }, (err) => {
+fs.mkdir(path.join(__dirname, 'project-dist'), { recursive: true }, (err) => {
   if (err) throw err;
 });
 let CSSpath = path.join(__dirname, 'project-dist', 'style.css');
@@ -35,12 +35,9 @@ function copyDir(src, dist) {
     });
   });
 }
-copyDir(
-  '06-build-page/assets/fonts',
-  '06-build-page/project-dist/assets/fonts',
-);
-copyDir('06-build-page/assets/img', '06-build-page/project-dist/assets/img');
-copyDir('06-build-page/assets/svg', '06-build-page/project-dist/assets/svg');
+copyDir(path.join(__dirname, 'assets/fonts'), path.join(__dirname, 'project-dist/assets/fonts'));
+copyDir(path.join(__dirname, 'assets/img'), path.join(__dirname, 'project-dist/assets/img'));
+copyDir(path.join(__dirname, 'assets/svg'), path.join(__dirname, 'project-dist/assets/svg'));
 
 
 
@@ -53,20 +50,20 @@ function replaceTag() {
       let file_path = path.join(__dirname, 'project-dist/index.html');
       fs.readFile(file_path, 'utf8', (err, data1) => {
         fs.readFile(
-          '06-build-page/components/header.html',
+          path.join(__dirname, 'components/header.html'),
           'utf8',
           (err, data2) => {
             fs.readFile(
-              '06-build-page/components/articles.html',
+              path.join(__dirname, 'components/articles.html'),
               'utf8',
               (err, data3) => {
                 fs.readFile(
-                  '06-build-page/components/footer.html',
+                  path.join(__dirname, 'components/footer.html'),
                   'utf8',
                   (err, data4) => {
                     if (data1.includes('{{about}}')) {
                       fs.readFile(
-                        '06-build-page/components/about.html',
+                        path.join(__dirname, 'components/about.html'),
                         'utf8',
                         (err, data5) => {
                           data1 = data1.replace(/\{\{header\}\}/, data2);
